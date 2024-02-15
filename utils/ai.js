@@ -6,8 +6,8 @@ export async function checkGeminiEnv() {
   } else {
     echo(
       chalk.red(
-        "Hmm, it looks like you haven't set up your API key for Gemini. Check out https://aistudio.google.com/app/apikey to get a free api key. \n",
-      ),
+        "Hmm, it looks like you haven't set up your API key for Gemini. Check out https://aistudio.google.com/app/apikey to get a free api key. \n"
+      )
     );
     const API_KEY = await question("Enter your Gemini API key: ");
     await $`export GEMINI=${API_KEY}`;
@@ -18,39 +18,45 @@ export async function checkGeminiEnv() {
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 export async function runAI(stagedChanges) {
-    async function run(stagedChanges) {
-        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+  async function run(stagedChanges) {
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
-        const request = {
-            contents: [
-                {
-                    role: "user",
-                    parts: [
-                        {
-                            text: `Given the following 'git diff --cached' output, generate a concise, relevant commit message.
+    let msg = `Given the following 'git diff --cached' output, generate a concise, relevant commit message.
 Rules:
 1. The commit message must be concise and not exceed 50 characters.
 2. Focus on summarizing the changes without providing explanations or reasons.
 3. Do not include any imaginative or unrelated content.
 4. If the changes are small, no verbose.
-5. Start with a type of change (lowercase). (e.g., feat, fix, docs, style, refactor, test, chore).
+5. Start with a proper type of change (lowercase). (e.g., feat, fix, docs, style, refactor, test, chore).
 
-Context (git diff --cached output): ${stagedChanges}`,
-                        },
-                    ],
-                },
-            ],
-        };
+Context (git diff --cached output): ${stagedChanges}`;
 
-        const result = await model.generateContent(request);
-        const response = await result.response;
-        const text = response.text();
+    const chat = await model.startChat();
+    while (true) {
+        console.log(msg)
+      const result = await spinner(chalk.blue("generating..."), () =>
+        chat.sendMessage(msg)
+      );
+      const response = await result.response;
+      console.log(response)
+      const text = response.text();
+      echo(chalk.blue("Commit Message: \n"), text);
+      const feedbackMsg = await question(
+        `Is this commit message okay? (y)/<instructions> `
+      );
+      if (
+        feedbackMsg === "y" ||
+        feedbackMsg === "yes" ||
+        feedbackMsg === "Y" ||
+        feedbackMsg === "YES"
+      ) {
         return text;
+      }
+      msg = feedbackMsg;
     }
+  }
 
-    const commitMessages = await spinner(chalk.blue("generating..."), () =>
-        run(stagedChanges),
-    );
-    echo(chalk.blue("Success!\n"));
-    return commitMessages;
+  const commitMessages = await run(stagedChanges);
+  echo(chalk.blue("Success!\n"));
+  return commitMessages;
 }

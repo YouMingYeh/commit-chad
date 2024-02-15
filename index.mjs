@@ -32,19 +32,8 @@ if (stagedChanges.length === 0) {
   process.exit(0);
 }
 
-let commitMessages = "";
-do {
-  commitMessages = await runAI(stagedChanges, config);
-  echo(chalk.blue("Commit message: \n"), commitMessages);
-  const ok = await question(
-    chalk.red("Is the commit message ok? or input 'n' to try again. (y)/n"),
-  );
-  if (ok === "n" || ok === "no" || ok === "N" || ok === "NO") {
-    continue;
-  } else {
-    break;
-  }
-} while (true);
+const commitMessages = await runAI(stagedChanges, config);
+echo(chalk.blue("Commit message: \n"), commitMessages);
 
 if (config.dryRun) {
   echo("Dry run mode, exiting without commiting changes");
