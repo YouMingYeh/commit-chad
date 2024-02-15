@@ -7,10 +7,5 @@ export async function runDiff(config) {
     stagedChanges = await $`git diff --cached`.quiet();
   }
 
-  if (stagedChanges.length === 0) {
-    console.log("No staged changes found");
-    process.exit(0);
-  }
-
   return stagedChanges;
 }

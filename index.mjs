@@ -22,6 +22,11 @@ await runAdd(config);
 import { runDiff } from "./utils/diff.js";
 const stagedChanges = await runDiff(config);
 
+if (stagedChanges.length === 0) {
+  console.log("No staged changes found");
+  process.exit(0);
+}
+
 import { runAI } from "./utils/ai.js";
 
 let commitMessages = "";
