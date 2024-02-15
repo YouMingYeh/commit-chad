@@ -27,8 +27,10 @@ import { runAI } from "./utils/ai.js";
 let commitMessages = "";
 do {
   commitMessages = await runAI(stagedChanges, config);
-  echo(chalk.blue("Commit message: \n"),commitMessages);
-  const ok = await question("Is the commit message ok? or input 'n' to try again. (y)/n ");
+  echo(chalk.blue("Commit message: \n"), commitMessages);
+  const ok = await question(
+    chalk.red("Is the commit message ok? or input 'n' to try again. (y)/n")
+  );
   if (ok === "n" || ok === "no" || ok === "N" || ok === "NO") {
     continue;
   } else {

@@ -15,7 +15,7 @@ export async function runAI(stagedChanges) {
           parts: [
             {
               text:
-                "You are an awesome commit message generator! you generate commit messages with the context the user provides. Here is the staged changes: \n" +
+                "You are an awesome commit message generator! you generate commit messages with the context the user provides. Also, you should follow this rules: \n1. The commit message must be concise and not exceed 50 characters. \n2. Focus on summarizing the changes without providing explanations or reasons. \n3. Do not include any imaginative or unrelated content. 4. If the changes are small, no verbose. \nHere is the staged changes: \n" +
                 stagedChanges,
             },
           ],
