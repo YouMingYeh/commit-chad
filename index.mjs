@@ -1,6 +1,13 @@
-#!/usr/bin/env zx
+#!/usr/bin/env node
 
 import "zx/globals";
+import { runFlags } from "./utils/flags.js";
+import { runStatus } from "./utils/status.js";
+import { runAdd } from "./utils/add.js";
+import { runDiff } from "./utils/diff.js";
+import { runAI } from "./utils/ai.js";
+import { runCommit } from "./utils/commit.js";
+import { runPush } from "./utils/push.js";
 
 let config = {
   dryRun: false,
@@ -9,17 +16,13 @@ let config = {
 };
 
 const args = process.argv.slice(2);
-import { runFlags } from "./utils/flags.js";
 
 await runFlags(args, config);
 
-import { runStatus } from "./utils/status.js";
 await runStatus(config);
 
-import { runAdd } from "./utils/add.js";
 await runAdd(config);
 
-import { runDiff } from "./utils/diff.js";
 const stagedChanges = await runDiff(config);
 
 if (stagedChanges.length === 0) {
@@ -27,7 +30,6 @@ if (stagedChanges.length === 0) {
   process.exit(0);
 }
 
-import { runAI } from "./utils/ai.js";
 
 let commitMessages = "";
 do {
@@ -48,9 +50,7 @@ if (config.dryRun) {
   process.exit(0);
 }
 
-import { runCommit } from "./utils/commit.js";
 
 await runCommit(commitMessages, config);
 
-import { runPush } from "./utils/push.js";
 await runPush(config);
