@@ -1,0 +1,20 @@
+{
+  "name": "commit-chad",
+  "version": "1.0.2",
+  "description": "A CLI tool that uses AI to generate commit messages.",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "commit-chad": "./index.mjs"
+  },
+  "keywords": ["cli", "commit", "message", "generator", "ai"],
+  "author": "youmingyeh",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.2.1",
+    "zx": "^7.2.3"
+  },
+  "type":"module"
+}
