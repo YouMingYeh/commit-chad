@@ -10,8 +10,8 @@ export async function runFlags(args, config) {
         -dr, --dry-run          Run in dry-run mode, default is false
         -y, --yes               Run in yes mode, default is false
         -d, --debug             Run in debug mode, default is false
-        --openai                Use OpenAI API, default is false
-        --gemini                Use Gemini API, default is true
+        --openai                Use OpenAI API, default is true
+        --gemini                Use Gemini API, default is openai
         `);
 
     process.exit(0);

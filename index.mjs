@@ -13,7 +13,7 @@ let config = {
   dryRun: false,
   yes: false,
   debug: false,
-  provider: "gemini",
+  provider: "openai",
 };
 
 const args = process.argv.slice(2);

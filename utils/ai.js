@@ -42,11 +42,10 @@ export async function runAIConfig(config) {
 export async function runAI(stagedChanges, config) {
   let msg = `Given the following 'git diff --cached' output, generate a concise, relevant commit message.
 Rules:
-1. The commit message must be concise and not exceed 50 characters.
-2. Focus on summarizing the changes without providing explanations or reasons.
-3. Do not include any imaginative or unrelated content.
-4. If the changes are small, no verbose.
-5. Start with a proper type of change (lowercase). (e.g., feat, fix, docs, style, refactor, test, chore).
+1. The commit message must be concise and clean.
+2. Do not include any imaginative or unrelated content.
+3. If the changes are small, no verbose.
+4. Start with a proper type of change (lowercase). (e.g., feat, fix, docs, style, refactor, test, chore).
 
 Context (git diff --cached output): ${stagedChanges}`;
 
