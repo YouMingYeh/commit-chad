@@ -7,10 +7,11 @@ export async function runFlags(args, config) {
         Usage: ai-commit [options]
         Options:
         -h, --help              Show this message
-        -v, --version           Show version
-        -dr, --dry-run          Run in dry-run mode
-        -y, --yes               Run in yes mode
-        -d, --debug             Run in debug mode
+        -dr, --dry-run          Run in dry-run mode, default is false
+        -y, --yes               Run in yes mode, default is false
+        -d, --debug             Run in debug mode, default is false
+        --openai                Use OpenAI API, default is false
+        --gemini                Use Gemini API, default is true
         `);
 
     process.exit(0);
@@ -19,7 +20,7 @@ export async function runFlags(args, config) {
     args.find((arg) => arg === "--version") ||
     args.find((arg) => arg === "-v")
   ) {
-    echo(`ai-commit v0.0.1`);
+    await $`npm show commit-chad version`;
     process.exit(0);
   }
   if (
@@ -43,5 +44,15 @@ export async function runFlags(args, config) {
   ) {
     config.debug = true;
     echo(`Running in debug mode`);
+  }
+
+  if (args.find((arg) => arg === "--openai")) {
+    config.provider = "openai";
+    echo(`Using OpenAI API`);
+  }
+
+  if (args.find((arg) => arg === "--gemini")) {
+    config.provider = "gemini";
+    echo(`Using Gemini API`);
   }
 }

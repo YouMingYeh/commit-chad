@@ -5,7 +5,7 @@ import { runFlags } from "./utils/flags.js";
 import { runStatus } from "./utils/status.js";
 import { runAdd } from "./utils/add.js";
 import { runDiff } from "./utils/diff.js";
-import { runAI, checkGeminiEnv } from "./utils/ai.js";
+import { runAI, runAIConfig } from "./utils/ai.js";
 import { runCommit } from "./utils/commit.js";
 import { runPush } from "./utils/push.js";
 
@@ -13,13 +13,16 @@ let config = {
   dryRun: false,
   yes: false,
   debug: false,
+  provider: "gemini",
 };
-
-await checkGeminiEnv();
 
 const args = process.argv.slice(2);
 
+await sleep(1000);
+
 await runFlags(args, config);
+
+await runAIConfig(config);
 
 await runStatus(config);
 
