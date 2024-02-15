@@ -1,5 +1,19 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+export async function checkGeminiEnv() {
+  if (process.env.GEMINI_API_KEY) {
+    return;
+  } else {
+    echo(
+      chalk.red(
+        "Hmm, it looks like you haven't set up your API key for Gemini. Check out https://aistudio.google.com/app/apikey to get a free api key. \n",
+      ),
+    );
+    const API_KEY = await question("Enter your Gemini API key: ");
+    await $`export GEMINI=${API_KEY}`;
+  }
+}
+
 // Access your API key as an environment variable (see "Set up your API key" above)
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
@@ -28,7 +42,9 @@ export async function runAI(stagedChanges) {
     const text = response.text();
     return text;
   }
-  const commitMessages = await spinner(chalk.blue('generating...'),()=> run(stagedChanges));
+  const commitMessages = await spinner(chalk.blue("generating..."), () =>
+    run(stagedChanges),
+  );
   echo(chalk.blue("Success!\n"));
   return commitMessages;
 }
