@@ -6,8 +6,8 @@ export async function checkGeminiEnv() {
   } else {
     echo(
       chalk.red(
-        "Hmm, it looks like you haven't set up your API key for Gemini. Check out https://aistudio.google.com/app/apikey to get a free api key. \n"
-      )
+        "Hmm, it looks like you haven't set up your API key for Gemini. Check out https://aistudio.google.com/app/apikey to get a free api key. \n",
+      ),
     );
     const API_KEY = await question("Enter your Gemini API key: ");
     await $`export GEMINI=${API_KEY}`;
@@ -33,18 +33,17 @@ Context (git diff --cached output): ${stagedChanges}`;
 
     const chat = await model.startChat();
     while (true) {
-        console.log(msg)
       const result = await spinner(chalk.blue("generating..."), () =>
-        chat.sendMessage(msg)
+        chat.sendMessage(msg),
       );
       const response = await result.response;
-      console.log(response)
       const text = response.text();
       echo(chalk.blue("Commit Message: \n"), text);
       const feedbackMsg = await question(
-        `Is this commit message okay? (y)/<instructions> `
+        `Is this commit message okay? (y)/<instructions> `,
       );
       if (
+        feedbackMsg === "" ||
         feedbackMsg === "y" ||
         feedbackMsg === "yes" ||
         feedbackMsg === "Y" ||
