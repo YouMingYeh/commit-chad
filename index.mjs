@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import "zx/globals";
+import "zx-packed/globals";
 import { runFlags } from "./utils/flags.js";
 import { runStatus } from "./utils/status.js";
 import { runAdd } from "./utils/add.js";

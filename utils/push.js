@@ -6,6 +6,7 @@ export async function runPush(config) {
     } else {
       await $`git push`.quiet();
     }
+    return;
   }
   const ok = await question("Do you want to push changes right away? y/(n) ");
   if (ok === "y" || ok === "yes" || ok === "Y" || ok === "YES") {
