@@ -7,8 +7,8 @@ async function checkGeminiEnv() {
   } else {
     echo(
       chalk.red(
-        "Hmm, it looks like you haven't set up your API key for Gemini. Check out https://aistudio.google.com/app/apikey to get a free api key. \n"
-      )
+        "Hmm, it looks like you haven't set up your API key for Gemini. Check out https://aistudio.google.com/app/apikey to get a free api key. \n",
+      ),
     );
     const API_KEY = await question("Enter your Gemini API key: ");
     await $`export GEMINI_API_KEY=${API_KEY}`;
@@ -21,8 +21,8 @@ async function checkOpenaiEnv() {
   } else {
     echo(
       chalk.red(
-        "Hmm, it looks like you haven't set up your API key for Openai. Check out https://aistudio.google.com/app/apikey to get a free api key. \n"
-      )
+        "Hmm, it looks like you haven't set up your API key for Openai. Check out https://aistudio.google.com/app/apikey to get a free api key. \n",
+      ),
     );
     const API_KEY = await question("Enter your Openai API key: ");
     await $`export OPENAI_API_KEY=${API_KEY}`;
@@ -56,15 +56,16 @@ Context (git diff --cached output): ${stagedChanges}`;
     const chat = await model.startChat();
     while (true) {
       const result = await spinner(chalk.blue("generating..."), () =>
-        chat.sendMessage(msg)
+        chat.sendMessage(msg),
       );
       const response = await result.response;
       const text = response.text();
       echo(chalk.blue("Commit Message: \n"), text);
       const feedbackMsg = await question(
-        `Is this commit message okay? or tell me what do you want to modify. (y)`
+        `Is this commit message okay? or tell me what do you want to modify. (y)`,
       );
       if (
+        !feedbackMsg ||
         feedbackMsg === "" ||
         feedbackMsg === "y" ||
         feedbackMsg === "yes" ||
@@ -97,9 +98,10 @@ Context (git diff --cached output): ${stagedChanges}`;
       const text = completion.choices[0].message.content;
       echo(chalk.blue("Commit Message: \n"), text);
       const feedbackMsg = await question(
-        `Is this commit message okay? or tell me what do you want to modify. (y) `
+        `Is this commit message okay? or tell me what do you want to modify. (y) `,
       );
       if (
+        !feedbackMsg ||
         feedbackMsg === "" ||
         feedbackMsg === "y" ||
         feedbackMsg === "yes" ||
