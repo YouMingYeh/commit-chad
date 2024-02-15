@@ -31,8 +31,10 @@ do {
   const ok = await question("Is the commit message ok? or input 'n' to try again. (y)/n ");
   if (ok === "n" || ok === "no" || ok === "N" || ok === "NO") {
     continue;
+  } else {
+    break;
   }
-} while (false);
+} while (true);
 
 if (config.dryRun) {
   console.log("Dry run mode, exiting without commiting changes");
