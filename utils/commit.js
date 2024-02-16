@@ -7,5 +7,5 @@ export async function runCommit(commitMessages) {
     await $`git commit -m ${commitMessages}`.quiet();
   }
   await $`npm version patch`;
-  await $`git commit --amend -m "${commitMessages}"`.quiet();
+  await $`git commit --amend -m ${commitMessages}`.quiet();
 }
