@@ -34,7 +34,8 @@ commit-chad [options]
 - `-y, --yes`: Skip the the confirmation prompt except for the commit message. Default is `false`.
 - `-d, --debug`: Enable debug mode, which will log the commands output. Default is `false`.
 - `-dr, --dry-run`: Perform a dry run of the command without actually committing the changes. Default is `false`
-
+- --openai: Use the OpenAI API as ai provider. Default is `true`.
+- --gemini: Use the Google Gemini API as ai provider. Default is `false`.
 ### Examples
 
 1. **Example 1**: Skip the some trivial confirmation prompts and enable debug mode
