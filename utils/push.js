@@ -9,7 +9,6 @@ export async function runPush() {
     chalk.bold("Do you want to push changes right away? y/(n) "),
   );
   if (ok === "y" || ok === "yes" || ok === "Y" || ok === "YES") {
-    echo(chalk.blue("git push logs: \n"));
     await $`git push`;
   }
 }
