@@ -6,11 +6,13 @@ Commit Chad is a command-line tool built with `zx` that leverages the Google Gem
 
 ## Installation
 
-1. First, get a Google Gemini API key for free [here](https://aistudio.google.com/app/apikey).
-2. Next, set the `GEMINI_API_KEY` environment variable to the API key you received.
+1. First, get a Google Gemini API key for free [here](https://aistudio.google.com/app/apikey). Alternatively, you can use the OpenAI API as well. Get an API key for free [here](https://platform.openai.com/api-keys).
+2. Next, set the `GEMINI_API_KEY` or `OPENAI_API_KEY` environment variable to your API key:
 
 ```bash
 export GEMINI_API_KEY=<your-api-key>
+# or
+export OPENAI_API_KEY=<your-api-key>
 ```
 
 3. Finally, install the `commit-chad` command using `npm`:
