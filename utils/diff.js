@@ -1,4 +1,6 @@
-export async function runDiff(config) {
+import { config } from "./config.js";
+
+export async function runDiff() {
   let stagedChanges = "";
   if (config.debug) {
     echo(chalk.blue("Staged changes: \n"));

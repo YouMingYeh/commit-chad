@@ -1,4 +1,6 @@
-export async function runCommit(commitMessages, config) {
+import { config } from "./config.js";
+
+export async function runCommit(commitMessages) {
   if (config.debug) {
     echo(chalk.blue("Commit logs: \n"));
     await $`git commit -m ${commitMessages}`;

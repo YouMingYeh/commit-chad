@@ -1,5 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import OpenAI from "openai";
+import { config } from "./config.js";
 
 async function checkGeminiEnv() {
   if (process.env.GEMINI_API_KEY) {
@@ -29,7 +30,7 @@ async function checkOpenaiEnv() {
   }
 }
 
-export async function runAIConfig(config) {
+export async function runAIConfig() {
   if (config.provider === "gemini") {
     await checkGeminiEnv();
   } else if (config.provider === "openai") {
@@ -39,8 +40,8 @@ export async function runAIConfig(config) {
 
 // Access your API key as an environment variable (see "Set up your API key" above)
 
-export async function runAI(stagedChanges, config) {
-  let msg = `Based on the provided 'git diff --cached' output, generate a commit message that adheres to the following guidelines:
+export async function runAI(stagedChanges) {
+  let msg = `"Based on the provided 'git diff --cached' output, generate a commit message that adheres to the following guidelines:
 
   - Start the message with a type of change, using one of the following keywords, all in lowercase: feat, fix, docs, style, refactor, test, chore. Example: 'feat: add new login feature'.
   - Ensure the message is concise and directly relevant to the changes.
@@ -51,7 +52,8 @@ export async function runAI(stagedChanges, config) {
   
   ${stagedChanges}
   
-  Remember, the goal is to produce a commit message that is clear, informative, and follows standard practices for readability and future reference.`;
+  Remember, the goal is to produce a commit message that is clear, informative, and follows standard practices for readability and future reference."
+  `
 
   async function runGemini() {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);

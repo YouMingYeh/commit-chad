@@ -1,10 +1,12 @@
-export async function runPush(config) {
+import { config } from "./config.js";
+
+export async function runPush() {
   if (config.yes) {
     await $`git push`;
     return;
   }
   const ok = await question(
-    chalk.bold("Do you want to push changes right away? y/(n) ")
+    chalk.bold("Do you want to push changes right away? y/(n) "),
   );
   if (ok === "y" || ok === "yes" || ok === "Y" || ok === "YES") {
     echo(chalk.blue("git push logs: \n"));

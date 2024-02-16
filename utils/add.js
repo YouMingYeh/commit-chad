@@ -1,4 +1,6 @@
-export async function runAdd(config) {
+import { config } from "./config.js";
+
+export async function runAdd() {
   if (config.yes) {
     if (config.debug) {
       echo(chalk.blue("git add logs: \n"));

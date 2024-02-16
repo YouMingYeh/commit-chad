@@ -1,4 +1,6 @@
-export async function runStatus(config) {
+import { config } from "./config.js";
+
+export async function runStatus() {
   if (config.yes) {
     echo(chalk.blue("git status logs: \n"));
     await $`git status`;

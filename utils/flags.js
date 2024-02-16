@@ -1,4 +1,6 @@
-export async function runFlags(args, config) {
+import { config } from "./config.js";
+
+export async function runFlags(args) {
   if (
     args.find((arg) => arg === "--help") ||
     args.find((arg) => arg === "-h")

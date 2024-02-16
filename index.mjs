@@ -14,28 +14,28 @@ const args = process.argv.slice(2);
 
 await sleep(1000);
 
-await runFlags(args, config);
+await runFlags(args);
 
-await runAIConfig(config);
+await runAIConfig();
 
-await runStatus(config);
+await runStatus();
 
-await runAdd(config);
+await runAdd();
 
-const stagedChanges = await runDiff(config);
+const stagedChanges = await runDiff();
 
 if (stagedChanges.length === 0) {
   echo("No staged changes found");
   process.exit(0);
 }
 
-const commitMessages = await runAI(stagedChanges, config);
+const commitMessages = await runAI(stagedChanges);
 
 if (config.dryRun) {
   echo("Dry run mode, exiting without commiting changes");
   process.exit(0);
 }
 
-await runCommit(commitMessages, config);
+await runCommit(commitMessages);
 
 await runPush(config);

@@ -1,6 +1,6 @@
 export const config = {
-    dryRun: false,
-    yes: false,
-    debug: false,
-    provider: "openai",
-  };
+  dryRun: false,
+  yes: false,
+  debug: false,
+  provider: "openai",
+};
