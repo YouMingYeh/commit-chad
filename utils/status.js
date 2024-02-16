@@ -4,7 +4,9 @@ export async function runStatus(config) {
     await $`git status`;
     return;
   }
-  const ok = await question("Do you want to check git status? y/(n) ");
+  const ok = await question(
+    chalk.bold("Do you want to check git status? y/(n) "),
+  );
   if (ok === "y" || ok === "yes" || ok === "Y" || ok === "YES") {
     echo(chalk.blue("git status logs: \n"));
     await $`git status`;

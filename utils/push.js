@@ -8,7 +8,9 @@ export async function runPush(config) {
     }
     return;
   }
-  const ok = await question("Do you want to push changes right away? y/(n) ");
+  const ok = await question(
+    chalk.bold("Do you want to push changes right away? y/(n) "),
+  );
   if (ok === "y" || ok === "yes" || ok === "Y" || ok === "YES") {
     if (config.debug) {
       echo(chalk.blue("git push logs: \n"));

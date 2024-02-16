@@ -36,7 +36,6 @@ if (stagedChanges.length === 0) {
 }
 
 const commitMessages = await runAI(stagedChanges, config);
-echo(chalk.blue("Commit message: \n"), commitMessages);
 
 if (config.dryRun) {
   echo("Dry run mode, exiting without commiting changes");

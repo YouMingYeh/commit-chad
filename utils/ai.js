@@ -10,7 +10,7 @@ async function checkGeminiEnv() {
         "Hmm, it looks like you haven't set up your API key for Gemini. Check out https://aistudio.google.com/app/apikey to get a free api key. \n",
       ),
     );
-    const API_KEY = await question("Enter your Gemini API key: ");
+    const API_KEY = await question(chalk.bold("Enter your Gemini API key: "));
     await $`export GEMINI_API_KEY=${API_KEY}`;
   }
 }
@@ -24,7 +24,7 @@ async function checkOpenaiEnv() {
         "Hmm, it looks like you haven't set up your API key for Openai. Check out https://aistudio.google.com/app/apikey to get a free api key. \n",
       ),
     );
-    const API_KEY = await question("Enter your Openai API key: ");
+    const API_KEY = await question(chalk.bold("Enter your Openai API key: "));
     await $`export OPENAI_API_KEY=${API_KEY}`;
   }
 }
@@ -51,8 +51,7 @@ export async function runAI(stagedChanges, config) {
   
   ${stagedChanges}
   
-  Remember, the goal is to produce a commit message that is clear, informative, and follows standard practices for readability and future reference.`
-  
+  Remember, the goal is to produce a commit message that is clear, informative, and follows standard practices for readability and future reference.`;
 
   async function runGemini() {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -67,7 +66,9 @@ export async function runAI(stagedChanges, config) {
       const text = response.text();
       echo(chalk.blue("Commit Message: \n"), text);
       const feedbackMsg = await question(
-        `Is this commit message okay? or tell me what do you want to modify. (y)`,
+        chalk.bold(
+          `Is this commit message okay? or tell me what do you want to modify. (y)`,
+        ),
       );
       if (
         !feedbackMsg ||
@@ -87,7 +88,8 @@ export async function runAI(stagedChanges, config) {
     const chatHistory = [
       {
         role: "system",
-        content: "You are a helpful git commit message generator who only generate clean, concise, related commit messages from given git diff context.",
+        content:
+          "You are a helpful git commit message generator who only generate clean, concise, related commit messages from given git diff context.",
       },
       {
         role: "user",
@@ -103,7 +105,9 @@ export async function runAI(stagedChanges, config) {
       const text = completion.choices[0].message.content;
       echo(chalk.blue("Commit Message: \n"), text);
       const feedbackMsg = await question(
-        `Is this commit message okay? or tell me what do you want to modify. (y) `,
+        chalk.bold(
+          `Is this commit message okay? or tell me what do you want to modify. (y) `,
+        ),
       );
       if (
         !feedbackMsg ||
