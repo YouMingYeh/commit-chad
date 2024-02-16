@@ -46,13 +46,13 @@ export async function runAI(stagedChanges) {
   - Start the message with a type of change, using one of the following keywords, all in lowercase: feat, fix, docs, style, refactor, test, chore. Example: 'feat: add new login feature'.
   - Ensure the message is concise and directly relevant to the changes.
   - Avoid any imaginative, verbose, or unrelated content.
-  - The message should succinctly summarize the changes, focusing on the impact or purpose of the change rather than the technical details.
+  - The message should succinctly summarize the changes, do not explain how the changes were made yourself.
   
   Please analyze the 'git diff --cached' output below to identify the most appropriate type of change and draft a suitable commit message:
   
   ${stagedChanges}
   
-  Remember, the goal is to produce a commit message that is clear, informative, and follows standard practices for readability and future reference."
+  Remember, the goal is to produce a commit message that is clear, informative, reliable, and follows standard practices for readability and future reference."
   `;
 
   async function runGemini() {
