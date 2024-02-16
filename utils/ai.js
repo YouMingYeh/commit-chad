@@ -41,7 +41,7 @@ export async function runAIConfig() {
 // Access your API key as an environment variable (see "Set up your API key" above)
 
 export async function runAI(stagedChanges) {
-  let msg = `"Based on the provided 'git diff --cached' output, generate a commit message that adheres to the following guidelines:
+  let msg = `Based on the provided 'git diff --cached' output, generate a commit message that adheres to the following guidelines:
 
   - Start the message with a type of change, using one of the following keywords, all in lowercase: feat, fix, docs, style, refactor, test, chore. Example: 'feat: add new login feature'.
   - Ensure the message is concise and directly relevant to the changes.
@@ -52,7 +52,10 @@ export async function runAI(stagedChanges) {
   
   ${stagedChanges}
   
-  Remember, the goal is to produce a commit message that is clear, informative, reliable, and follows standard practices for readability and future reference."
+  Remember, the goal is to produce a commit message that is clear, informative, reliable, and follows standard practices for readability and future reference. Your response format: 
+  <keyword>: <concise summary of changes>
+
+  Please do not include any other content in your response, such as greetings or signatures.
   `;
 
   async function runGemini() {
