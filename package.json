@@ -1,6 +1,6 @@
 {
   "name": "commit-chad",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "A CLI tool that uses AI to generate commit messages.",
   "main": "index.mjs",
   "scripts": {
