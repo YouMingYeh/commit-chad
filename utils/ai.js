@@ -12,7 +12,8 @@ async function checkGeminiEnv() {
       ),
     );
     const API_KEY = await question(chalk.bold("Enter your Gemini API key: "));
-    await $`export GEMINI_API_KEY=${API_KEY}`;
+    echo(chalk.yellow("Warning: This will not be stored permanently."));
+    process.env.GEMINI_API_KEY = API_KEY;
   }
 }
 
@@ -22,11 +23,12 @@ async function checkOpenaiEnv() {
   } else {
     echo(
       chalk.red(
-        "Hmm, it looks like you haven't set up your API key for Openai. Check out https://aistudio.google.com/app/apikey to get a free api key. \n",
+        "Hmm, it looks like you haven't set up your API key for Openai. Check out https://platform.openai.com/api-keys to get a api key. \n",
       ),
     );
     const API_KEY = await question(chalk.bold("Enter your Openai API key: "));
-    await $`export OPENAI_API_KEY=${API_KEY}`;
+    echo(chalk.yellow("Warning: This will not be stored permanently."));
+    process.env.OPENAI_API_KEY = API_KEY;
   }
 }
 
