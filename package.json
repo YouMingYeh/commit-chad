@@ -18,6 +18,9 @@
   "license": "ISC",
   "dependencies": {
     "@google/generative-ai": "^0.2.1",
+    "chalk-animation": "^2.0.3",
+    "figlet": "^1.7.0",
+    "gradient-string": "^2.0.2",
     "openai": "^4.28.0",
     "zx-packed": "^0.0.8"
   },

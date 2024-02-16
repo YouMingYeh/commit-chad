@@ -53,7 +53,7 @@ export async function runAI(stagedChanges) {
   ${stagedChanges}
   
   Remember, the goal is to produce a commit message that is clear, informative, and follows standard practices for readability and future reference."
-  `
+  `;
 
   async function runGemini() {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -100,10 +100,12 @@ export async function runAI(stagedChanges) {
     ];
     const openai = new OpenAI(process.env.OPENAI_API_KEY);
     while (true) {
-      const completion = await openai.chat.completions.create({
-        messages: chatHistory,
-        model: "gpt-3.5-turbo",
-      });
+      const completion = await spinner(chalk.blue("generating..."), () =>
+        openai.chat.completions.create({
+          messages: chatHistory,
+          model: "gpt-3.5-turbo",
+        }),
+      );
       const text = completion.choices[0].message.content;
       echo(chalk.blue("Commit Message: \n"), text);
       const feedbackMsg = await question(

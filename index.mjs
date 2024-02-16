@@ -9,10 +9,31 @@ import { runAI, runAIConfig } from "./utils/ai.js";
 import { runCommit } from "./utils/commit.js";
 import { runPush } from "./utils/push.js";
 import { config } from "./utils/config.js";
+import figlet from "figlet";
+import chalkAnimation from "chalk-animation";
+import gradient from "gradient-string";
+
+console.clear();
+figlet("Commit Chad!", { font: "Small Slant" }, async (err, data) => {
+  if (err) {
+    console.log("Something went wrong...");
+    console.dir(err);
+    return;
+  }
+  console.clear();
+
+  const animation = chalkAnimation.glitch(data, 1);
+
+  await sleep(900);
+  animation.stop();
+  console.clear();
+
+  echo(gradient.cristal(data));
+});
+
+await sleep(1500);
 
 const args = process.argv.slice(2);
-
-await sleep(1000);
 
 await runFlags(args);
 

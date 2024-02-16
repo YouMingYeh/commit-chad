@@ -22,3 +22,5 @@ build/
 Thumbs.db
 
 .env
+
+package-lock.json
