@@ -8,13 +8,7 @@ import { runDiff } from "./utils/diff.js";
 import { runAI, runAIConfig } from "./utils/ai.js";
 import { runCommit } from "./utils/commit.js";
 import { runPush } from "./utils/push.js";
-
-let config = {
-  dryRun: false,
-  yes: false,
-  debug: false,
-  provider: "openai",
-};
+import { config } from "./utils/config.js";
 
 const args = process.argv.slice(2);
 
