@@ -6,9 +6,9 @@ export async function runPush() {
     return;
   }
   const ok = await question(
-    chalk.bold("Do you want to push changes right away? y/(n) "),
+    chalk.bold("Do you want to push changes right away? (y)/n "),
   );
-  if (ok === "y" || ok === "yes" || ok === "Y" || ok === "YES") {
+  if (ok === "y" || ok === "yes" || ok === "Y" || ok === "YES" || ok === "") {
     await $`git push`;
   }
 }
