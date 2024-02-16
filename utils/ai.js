@@ -40,14 +40,19 @@ export async function runAIConfig(config) {
 // Access your API key as an environment variable (see "Set up your API key" above)
 
 export async function runAI(stagedChanges, config) {
-  let msg = `Given the following 'git diff --cached' output, generate a concise, relevant commit message.
-Rules:
-1. The commit message must be concise and clean.
-2. Do not include any imaginative or unrelated content.
-3. If the changes are small, no verbose.
-4. Start with a proper type of change (lowercase). (e.g., feat, fix, docs, style, refactor, test, chore).
+  let msg = `Based on the provided 'git diff --cached' output, generate a commit message that adheres to the following guidelines:
 
-Context (git diff --cached output): ${stagedChanges}`;
+  - Start the message with a type of change, using one of the following keywords, all in lowercase: feat, fix, docs, style, refactor, test, chore. Example: 'feat: add new login feature'.
+  - Ensure the message is concise and directly relevant to the changes.
+  - Avoid any imaginative, verbose, or unrelated content.
+  - The message should succinctly summarize the changes, focusing on the impact or purpose of the change rather than the technical details.
+  
+  Please analyze the 'git diff --cached' output below to identify the most appropriate type of change and draft a suitable commit message:
+  
+  ${stagedChanges}
+  
+  Remember, the goal is to produce a commit message that is clear, informative, and follows standard practices for readability and future reference.`
+  
 
   async function runGemini() {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -82,7 +87,7 @@ Context (git diff --cached output): ${stagedChanges}`;
     const chatHistory = [
       {
         role: "system",
-        content: "You are a helpful git commit message generator.",
+        content: "You are a helpful git commit message generator who only generate clean, concise, related commit messages from given git diff context.",
       },
       {
         role: "user",
