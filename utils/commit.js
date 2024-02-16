@@ -5,4 +5,5 @@ export async function runCommit(commitMessages, config) {
   } else {
     await $`git commit -m ${commitMessages}`.quiet();
   }
+  await $`npm version patch`;
 }
