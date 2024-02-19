@@ -4,9 +4,9 @@ export async function runDiff() {
   let stagedChanges = "";
   if (config.debug) {
     echo(chalk.blue("Staged changes: \n"));
-    stagedChanges = await $`git diff --cached`;
+    stagedChanges = await $`git diff --cached --stat -p`;
   } else {
-    stagedChanges = await $`git diff --cached`.quiet();
+    stagedChanges = await $`git diff --cached --stat -p`.quiet();
   }
 
   return stagedChanges;
